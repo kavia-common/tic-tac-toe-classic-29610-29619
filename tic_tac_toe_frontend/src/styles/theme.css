@@ -1,0 +1,286 @@
+:root {
+  /* Ocean Professional Theme */
+  --color-primary: #3b82f6;  /* Blue-500 */
+  --color-secondary: #64748b; /* Slate-500 */
+  --color-success: #06b6d4; /* Cyan-500 */
+  --color-error: #EF4444;   /* Red-500 */
+  --color-bg: #f9fafb;      /* Gray-50 */
+  --color-surface: #ffffff; /* White */
+  --color-text: #111827;    /* Gray-900 */
+
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+  --shadow-lg: 0 18px 40px rgba(2, 6, 23, 0.15);
+
+  --transition-fast: 180ms ease;
+  --transition-base: 240ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(249,250,251,1));
+  color: var(--color-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.app-title {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.app-subtitle {
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+
+.status {
+  margin: 14px 0 18px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.badge-primary {
+  color: var(--color-primary);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: linear-gradient(180deg, #ffffff, #f5f7ff);
+}
+
+.badge-secondary {
+  color: var(--color-secondary);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  background: linear-gradient(180deg, #ffffff, #f7f9fb);
+}
+
+.badge-success {
+  color: var(--color-success);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  background: linear-gradient(180deg, #ffffff, #effbff);
+}
+
+.board-wrapper {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.square {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f4f7fb);
+  box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(17, 24, 39, 0.06);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.square:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.square:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.square:disabled {
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+
+.square-value {
+  font-size: clamp(36px, 8vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.square-x .square-value {
+  color: var(--color-primary);
+  text-shadow: 0 8px 20px rgba(59,130,246,0.25);
+}
+
+.square-o .square-value {
+  color: #f59e0b; /* Amber-500 accent for O */
+  text-shadow: 0 8px 18px rgba(245,158,11,0.2);
+}
+
+.square-win {
+  background: linear-gradient(180deg, rgba(6,182,212,0.08), #ffffff);
+  box-shadow: 0 10px 28px rgba(6,182,212,0.25), inset 0 0 0 1px rgba(6,182,212,0.35);
+}
+
+.scoreboard {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.score-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(17, 24, 39, 0.06);
+}
+
+.score-label {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.score-value {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.score-x {
+  color: var(--color-primary);
+}
+
+.score-o {
+  color: #f59e0b; /* Amber-500 */
+}
+
+.controls {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid rgba(17, 24, 39, 0.06);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(59,130,246,0.35);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  color: white;
+  border: 1px solid rgba(37, 99, 235, 0.8);
+}
+
+.btn-secondary {
+  background: linear-gradient(180deg, #e5e7eb, #e2e8f0);
+  color: #111827;
+  border: 1px solid rgba(100,116,139,0.35);
+}
+
+.btn-danger {
+  background: linear-gradient(180deg, #fca5a5, #ef4444);
+  color: #ffffff;
+  border: 1px solid rgba(239,68,68,0.8);
+}
+
+.app-footer {
+  margin-top: auto;
+  padding: 14px 20px 26px 20px;
+  text-align: center;
+  color: var(--color-secondary);
+  font-size: 13px;
+}
+
+@media (max-width: 420px) {
+  .controls {
+    flex-direction: column;
+  }
+}
